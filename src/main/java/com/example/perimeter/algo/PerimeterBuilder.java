@@ -16,14 +16,23 @@ public class PerimeterBuilder {
     }
 
     public void build(List<String> lines, String onDate, String id) {
-        Tree tree = buildTree(lines, onDate);
-        int rootId = Integer.parseInt(id);
+        int rootId;
+        LocalDate date;
+        try {
+            rootId = Integer.parseInt(id);
+            date = LocalDate.parse(onDate, dateTimeFormatter);
+        }
+        catch (NumberFormatException | DateTimeException e) {
+            System.out.println("Error: " + e);
+            return;
+        }
+        Tree tree = buildTree(lines, date);
         tree.trim(rootId);
         printTree(tree);
     }
 
-    private Tree buildTree(List<String> lines, String dateFromStr) {
-        LocalDate date = parseDateOrNow(dateFromStr);
+    private Tree buildTree(List<String> lines, LocalDate date) {
+
         Tree tree = new Tree();
         for (String line : lines) {
             String[] params = line.split(";");
@@ -51,16 +60,5 @@ public class PerimeterBuilder {
 
     private void printTree(Tree tree) {
         tree.printHierarchy();
-    }
-
-    private LocalDate parseDateOrNow(String dateFromStr) {
-        LocalDate date;
-        try {
-            date = LocalDate.parse(dateFromStr, dateTimeFormatter);
-        }
-        catch (DateTimeException e) {
-            date = LocalDate.now();
-        }
-        return date;
     }
 }

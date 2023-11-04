@@ -4,9 +4,6 @@ import com.example.perimeter.algo.PerimeterBuilder;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @SpringBootApplication
 public class PerimeterApplication {
 
@@ -14,7 +11,7 @@ public class PerimeterApplication {
         SpringApplication.run(PerimeterApplication.class, args);
 
         if (args.length < 3) {
-            System.out.println("Error: input filename, date, id");
+            System.out.println("Error: enter filename, date, id!");
             return;
         }
         String filename = args[0];
