@@ -14,11 +14,16 @@ public class PerimeterApplication {
         SpringApplication.run(PerimeterApplication.class, args);
 
         if (args.length == 0) {
-            System.out.println("Error: input filename and date");
+            System.out.println("Error: input filename");
             return;
         }
         String filename = args[0];
-        String date = args[1];
+
+        String date = "";
+        if (args.length > 1) date = args[1];
+        else
+            System.out.println("You don't enter a date. Build for today");
+
         PerimeterBuilder perimeterBuilder = new PerimeterBuilder();
         perimeterBuilder.buildFromFile(filename, date);
     }
