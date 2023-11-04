@@ -13,18 +13,15 @@ public class PerimeterApplication {
     public static void main(String[] args) {
         SpringApplication.run(PerimeterApplication.class, args);
 
-        if (args.length == 0) {
-            System.out.println("Error: input filename");
+        if (args.length < 3) {
+            System.out.println("Error: input filename, date, id");
             return;
         }
         String filename = args[0];
-
-        String date = "";
-        if (args.length > 1) date = args[1];
-        else
-            System.out.println("You don't enter a date. Build for today");
+        String date = args[1];
+        String id = args[2];
 
         PerimeterBuilder perimeterBuilder = new PerimeterBuilder();
-        perimeterBuilder.buildFromFile(filename, date);
+        perimeterBuilder.buildFromFile(filename, date, id);
     }
 }

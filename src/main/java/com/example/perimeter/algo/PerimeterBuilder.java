@@ -10,13 +10,15 @@ import java.util.List;
 public class PerimeterBuilder {
     private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
-    public void buildFromFile(String filename, String onDate) {
+    public void buildFromFile(String filename, String onDate, String id) {
         List<String> lines = File.read(filename);
-        build(lines, onDate);
+        build(lines, onDate, id);
     }
 
-    public void build(List<String> lines, String onDate) {
+    public void build(List<String> lines, String onDate, String id) {
         Tree tree = buildTree(lines, onDate);
+        int rootId = Integer.parseInt(id);
+        tree.trim(rootId);
         printTree(tree);
     }
 

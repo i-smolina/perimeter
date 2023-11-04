@@ -67,4 +67,11 @@ public class Tree {
     private String getBrackets(int n) {
         return ">".repeat(n);
     }
+
+    public void trim(int id) {
+        Node node = search(id);
+        if (node == null) return;
+        node.parent = null;
+        root = node;
+    }
 }
