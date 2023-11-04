@@ -52,4 +52,19 @@ public class Tree {
         for (Node child : node.children)
             print(child, sb);
     }
+
+    public void printHierarchy() {
+        printHierarchy(root);
+    }
+
+    private void printHierarchy(Node node) {
+        if (node == null) return;
+        System.out.println(getBrackets(node.level()) + node.id);
+        for (Node child : node.children)
+            printHierarchy(child);
+    }
+
+    private String getBrackets(int n) {
+        return ">".repeat(n);
+    }
 }
