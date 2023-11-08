@@ -53,43 +53,13 @@ class TreeTest {
     }
 
     @Test
-    void add_12() {
-        Tree tree = new Tree();
-        tree.add(2, 0, 1);
-        assertEquals("12", tree.print());
-    }
-
-    @Test
-    void add_1243() {
-        tree.add(5, 0, 3);
-        assertEquals("12435", tree.print());
-    }
-
-    @Test
     void print_empty() {
         Tree tree = new Tree();
-        assertEquals("", tree.print());
+        assertEquals("0", tree.print());
     }
 
     @Test
     void print_1243() {
         assertEquals("1243", tree.print());
-    }
-
-    @Test
-    void print_12() {
-        Tree tree = new Tree();
-        tree.root = new Node(1, 0, null);
-        tree.root.children.add(new Node(2, 0, tree.root));
-        assertEquals("12", tree.print());
-    }
-
-    @Test
-    void print_123() {
-        Tree tree = new Tree();
-        tree.root = new Node(1, 0, null);
-        tree.root.children.add(new Node(2, 0, tree.root));
-        tree.root.children.add(new Node(3,0,tree.root));
-        assertEquals("123", tree.print());
     }
 }

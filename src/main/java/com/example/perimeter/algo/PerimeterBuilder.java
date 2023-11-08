@@ -27,11 +27,11 @@ public class PerimeterBuilder {
             return;
         }
         Tree tree = buildTree(lines, date);
-        tree.trim(rootId);
+        trimTree(tree, rootId);
         printTree(tree);
     }
 
-    private Tree buildTree(List<String> lines, LocalDate date) {
+    Tree buildTree(List<String> lines, LocalDate date) {
 
         Tree tree = new Tree();
         for (String line : lines) {
@@ -60,5 +60,9 @@ public class PerimeterBuilder {
 
     private void printTree(Tree tree) {
         tree.printHierarchy();
+    }
+
+    private void trimTree(Tree tree, int id) {
+        tree.trim(id);
     }
 }

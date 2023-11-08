@@ -1,7 +1,7 @@
 package com.example.perimeter.algo;
 
 public class Tree {
-    Node root;
+    Node root = new Node(0, 0);
 
     public Node search(int id) {
         return search(root, id);
@@ -19,22 +19,23 @@ public class Tree {
     }
 
     public void add(int id, float percent, int parentId) {
+        Node current = search(id);
+        if (current != null && percent < current.getPercent()) return;
+
         Node parent = search(parentId);
         if (parent == null) {
-            parent = new Node(parentId, percent, null);
-            root = parent;
+            parent = new Node(parentId, 0, root);
+            root.addChild(parent);
         }
-        Node current = search(id);
+
         if (current == null) {
             current = new Node(id, percent, parent);
             parent.addChild(current);
         } else {
-            if (percent > current.getPercent()) {
-                current.getParent().deleteChild(current);
-                current.setPercent(percent);
-                current.setParent(parent);
-                parent.addChild(current);
-            }
+            current.getParent().deleteChild(current);
+            current.setPercent(percent);
+            current.setParent(parent);
+            parent.addChild(current);
         }
     }
 
@@ -54,14 +55,14 @@ public class Tree {
     }
 
     public void printHierarchy() {
-        printHierarchy(root);
+        printHierarchy(root, 0);
     }
 
-    private void printHierarchy(Node node) {
+    private void printHierarchy(Node node, int level) {
         if (node == null) return;
-        System.out.println(getBrackets(node.level()) + node.id);
+        System.out.println(getBrackets(level) + node.id);
         for (Node child : node.children)
-            printHierarchy(child);
+            printHierarchy(child, level + 1);
     }
 
     private String getBrackets(int n) {
@@ -70,7 +71,11 @@ public class Tree {
 
     public void trim(int id) {
         Node node = search(id);
-        if (node == null) return;
+        if (node == null) {
+            System.out.println("Not found root id: " + id);
+            root = null;
+            return;
+        }
         node.parent = null;
         root = node;
     }

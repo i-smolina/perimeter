@@ -32,13 +32,4 @@ public class Node {
         node.parent = null;
         children.remove(node);
     }
-
-    public int level() {
-        return level(0);
-    }
-
-    private int level(int n) {
-        if (parent == null) return n;
-        else return parent.level() + 1;
-    }
 }
